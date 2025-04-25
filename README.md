@@ -1,3 +1,6 @@
+![Run Unit Tests](https://github.com/sajidalirander/github-action-for-unit-testing/actions/workflows/test.yml/badge.svg)
+
+
 # What need to know about GitHub Actions?
 
 Refer to the [file](.github/workflows/test.yml) which is going to discussed in detail. 
@@ -75,4 +78,50 @@ jobs:
 
     * `export PYTHONPATH=.` tells Python to include current folder in the import path, so it can find imported modules/pakages.
     * `pytest` runs all the test files (files like `test_*.py` inside the `test/` folder).
+
+### Conclusion 
+When someone pushes code or makes a PR:
+1. GitHub creates a VM with Ubuntu + Python 3.10
+2. It clones code
+3. Installs dependencies
+4. Runs tests using pytest
+5. If tests pass: green checkmark ✅
+6. If tests fail: red cross and logs showing what failed ❌
+
+# Code Coverage Analysis Tool (Codecov)
+> How much of the code is being executed when tests run. 
+
+It is important to  know:
+* Did all functions tested?
+* Did it reach to both `if` and `else` statement? 
+* Are __error cases__ being tested?
+
+It gives a quantitative measure of the "tested" code is.
+
+## Steps to implement
+### Install `pytest-cov`
+Add it to `requirements.txt`
+```yaml
+pytest
+pytest-cov
+```
+Or install it manually:
+```yaml
+pip install pytest-cov
+```
+### Update GitHub Actions workflow to collect coverage data
+```yaml
+- name: Run tests with coverage
+  run: |
+    export PYTHONPATH=.
+    pytest --cov=my_package --cov-report=xml
+```
+Replace `my_package` with the actual folder where the source code lives. In this tutorial, `calculator.py` is in the current directory so using `--cov=.`
+
+This creates a file called `coverage.xml` that Codecov will use.
+
+### Sign up at [Codecov](https://app.codecov.io/login)
+1. Log in with your GitHub account
+2. Find the repo
+3. Authorize access
 
