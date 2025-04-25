@@ -1,5 +1,7 @@
 ![Run Unit Tests](https://github.com/sajidalirander/github-action-for-unit-testing/actions/workflows/test.yml/badge.svg)
 
+[![codecov](https://codecov.io/gh/sajidalirander/github-action-for-unit-testing/branch/main/graph/badge.svg)](https://app.codecov.io/gh/sajidalirander/github-action-for-unit-testing)
+
 
 # What need to know about GitHub Actions?
 
