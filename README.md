@@ -101,29 +101,75 @@ It is important to  know:
 It gives a quantitative measure of the "tested" code is.
 
 ## Steps to implement
-### Install `pytest-cov`
-Add it to `requirements.txt`
-```yaml
-pytest
-pytest-cov
-```
-Or install it manually:
-```yaml
-pip install pytest-cov
-```
-### Update GitHub Actions workflow to collect coverage data
-```yaml
-- name: Run tests with coverage
-  run: |
-    export PYTHONPATH=.
-    pytest --cov=my_package --cov-report=xml
-```
-Replace `my_package` with the actual folder where the source code lives. In this tutorial, `calculator.py` is in the current directory so using `--cov=.`
 
-This creates a file called `coverage.xml` that Codecov will use.
+1. Install `pytest-cov`
 
-### Sign up at [Codecov](https://app.codecov.io/login)
-1. Log in with your GitHub account
-2. Find the repo
-3. Authorize access
+    Add it to `requirements.txt`
+    ```yaml
+    pytest
+    pytest-cov
+    ```
+    Or install it manually:
+    ```yaml
+    pip install pytest-cov
+    ```
 
+2. Update GitHub Actions workflow to collect coverage data
+    ```yaml
+    - name: Run tests with coverage
+    run: |
+        export PYTHONPATH=.
+        pytest --cov=my_package --cov-report=xml
+    ```
+    Replace `my_package` with the actual folder where the source code lives. In this tutorial, `calculator.py` is in the current directory so using `--cov=.`
+
+    This creates a file called `coverage.xml` that Codecov will use.
+
+3. Sign up at [Codecov](https://app.codecov.io/login)
+    * Log in with your GitHub account
+    * Find the repo
+    * Authorize access
+
+4. Add Codecov upload to GitHub Actions
+
+    Add this step after __pytest__ in `test.yml`:
+    ```yaml
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v4
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}  # Optional for public repos
+        files: coverage.xml
+    ```
+5. Push the changes
+    ```python
+    git add .
+    git commit -m "chore: add coverage reporting with Codecov"
+    git push
+
+    ```
+6. Add Codecov Bedge
+
+    Go to repo's Codecov page and __configuration__ --> __Badges and Graphs__. 
+    Copy the link to show a live icon that can be embedded in the code. 
+    Visit the page to [learn more](https://docs.codecov.com/docs/status-badges).
+
+# Tools to Check the Python's Type Hints
+
+## `mypy` for Static Checking
+Install `mypy`:
+```python
+pip install mypy
+```
+Then run the following:
+```
+mypy <python-file-path>
+```
+It will show warnings if any type hints violates. 
+```python
+$ mypy calculatorv1.py 
+Success: no issues found in 1 source file
+```
+
+## @dataclass
+
+## pydantic
