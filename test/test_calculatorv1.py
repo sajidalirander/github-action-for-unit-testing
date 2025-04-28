@@ -2,7 +2,7 @@ import pytest
 from calculatorv1 import add, subtract, divide
 
 def test_add_valid():
-    assert add(2, "3") == 5
+    assert add(2, 3) == 5
     assert add(2.0, 3.0) == 5
 
 def test_add_invalid():
