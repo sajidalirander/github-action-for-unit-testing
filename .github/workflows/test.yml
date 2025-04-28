@@ -27,7 +27,7 @@ jobs:
     - name: Run tests
       run: |
         export PYTHONPATH=.
-        pytest test/test_calculatorv2.py --cov=test/test_calculatorv2.py  --cov-report=xml
+        pytest --cov=calculatorv2  --cov-report=xml test/test_calculatorv2.py
 
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v4
