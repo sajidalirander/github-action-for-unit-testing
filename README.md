@@ -172,4 +172,16 @@ Success: no issues found in 1 source file
 
 ## @dataclass
 
-## pydantic
+## Pydantic
+A library that provides data validation and type enforcement using Python type hints.
+
+It automatically checks types, raises errors if types don't match — no need to manually write `isinstance()` checks.
+
+Install locally:
+```python
+pip install pydantic
+```
+
+Incorporated pydantic in [`calculaotorv2.py`](calculatorv2.py) to validate the inputs. Automatically raise `ValidationError` if input types are wrong. 
+
+Updated [`test_calculatorv2.py`](test/test_calculatorv2.py) for simpler and even more powerful test. 

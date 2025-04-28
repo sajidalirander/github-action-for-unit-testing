@@ -2,7 +2,7 @@ import pytest
 from calculatorv1 import add, subtract, divide
 
 def test_add_valid():
-    assert add(2, 3) == 5
+    assert add(2, "3") == 5
     assert add(2.0, 3.0) == 5
 
 def test_add_invalid():
@@ -27,6 +27,3 @@ def test_divide_invalid_type():
 def test_divide_by_zero():
     with pytest.raises(ValueError):
         divide(10, 0)
-
-
-# pytest.raises allows to test exceptions cleanly.
