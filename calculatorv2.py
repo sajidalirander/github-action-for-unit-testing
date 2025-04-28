@@ -1,15 +1,9 @@
-from pydantic import BaseModel, field_validator, StrictFloat
+from pydantic import BaseModel, StrictFloat
 
 class CalculatorInput(BaseModel):
     a: StrictFloat
     b: StrictFloat
 
-    @field_validator('a', 'b')
-    @classmethod
-    def must_be_number(cls, value):
-        if not isinstance(value, (int, float)):
-            raise TypeError("Inputs must be int or float.")
-        return value
 
 def add(a: float, b: float) -> float:
     inputs = CalculatorInput(a=a, b=b)
